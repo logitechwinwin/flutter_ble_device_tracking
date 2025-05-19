@@ -19,16 +19,23 @@ class ProfileViewModel extends BaseViewModel {
   //  initialize(BuildContext context) async {}
   initialize(
     BuildContext context,
-    //   TextEditingController editingControllerEmail,
-    //   TextEditingController editingControllerPassword,
+    TextEditingController editingControllerName,
+    TextEditingController editingControllerEmail,
+    TextEditingController editingControllerRecoveryEmail,
+    TextEditingController editingControllerPassword,
+    TextEditingController editingControllerConfirmPassword,
   ) async {
     isFirst = await sharedService.getIsFirst();
     userModel = await sharedService.getUser();
 
-    // if (userModel != null) {
-    //   editingControllerEmail.text = userModel!.userEmail ?? '';
-    //   editingControllerPassword.text = userModel!.password ?? '';
-    // }
+    if (userModel != null) {
+      editingControllerEmail.text = userModel!.userEmail ?? '';
+      editingControllerPassword.text = userModel!.password ?? '';
+      editingControllerConfirmPassword.text = userModel!.password ?? '';
+      editingControllerName.text = userModel!.userName ?? '';
+      editingControllerRecoveryEmail.text =
+          userModel!.recoveryEmail ?? userModel!.userEmail ?? '';
+    }
 
     notifyListeners();
   }

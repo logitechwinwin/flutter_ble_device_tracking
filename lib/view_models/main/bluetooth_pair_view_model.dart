@@ -145,7 +145,7 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
 
   bool isDevicePaired(dynamic device) {
     if (Platform.isAndroid) {
-      return device.isBonded;
+      return false;
     } else if (Platform.isIOS) {
       print(
         ">>> model: isDevicePaired(): return: ${device.remoteId.str}, ${miOSConnectedList.any((d) => d.remoteId.str == device.remoteId.str)}",
@@ -164,67 +164,6 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
       return;
     }
     if (Platform.isAndroid) {
-      /*
-      if (isDiscovering) {
-        // Cancel the stream subscription to stop scanning
-        streamSubscription?.cancel();
-        streamSubscription = null; // Optional: Nullify the subscription
-        print("Scanning stopped");
-        //     streamSubscription!.pause();
-        isDiscovering = false;
-        notifyListeners();
-      } else {
-        isDiscovering = true;
-        discoveryResultList.clear();
-        notifyListeners();
-
-        mBondList = await FlutterBluetoothSerial.instance.getBondedDevices();
-        for (int i = 0; i < mBondList.length; i++) {
-          final existingIndex = discoveryResultList.indexWhere(
-            (element) => element.address == mBondList[i].address,
-          );
-          if (mBondList[i].name != null && mBondList[i].name!.isNotEmpty) {
-            if (existingIndex >= 0) {
-              discoveryResultList[existingIndex] = mBondList[i];
-            } else {
-              discoveryResultList.add(mBondList[i]);
-            }
-            if (mBondList[i].isConnected) {
-              discoverServices(mBondList[i].address, mBondList[i].name);
-            }
-          }
-        }
-
-        streamSubscription = FlutterBluetoothSerial.instance
-            .startDiscovery()
-            .listen((discoveryResult) {
-              final existingIndex = discoveryResultList.indexWhere(
-                (element) => element.address == discoveryResult.device.address,
-              );
-              if (discoveryResult.device.name != null &&
-                  discoveryResult.device.name!.isNotEmpty) {
-                if (existingIndex >= 0) {
-                  discoveryResultList[existingIndex] = discoveryResult.device;
-                } else {
-                  discoveryResultList.add(discoveryResult.device);
-                }
-              }
-              notifyListeners();
-            });
-        streamSubscription!.onDone(() {
-          print("Scanning stopped successfully");
-          isDiscovering = false;
-          notifyListeners();
-        });
-        streamSubscription!.onError((_) {
-          streamSubscription?.cancel();
-          streamSubscription = null;
-          print("Scanning stopped by exception error");
-          isDiscovering = false;
-          notifyListeners();
-        });
-      }
-      */
       if (isDiscovering) {
         print(">>> model: onClickScan() : isDiscovering");
         streamBlue?.cancel();
@@ -254,16 +193,16 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
                   (element) =>
                       element.remoteId.str == result.device.remoteId.str,
                 );
-                if (result.device.advName.isNotEmpty) {
-                  if (existingIndex >= 0) {
-                    miOSDiscoveryList[existingIndex] = blue.BluetoothDevice(
-                      remoteId: result.device.remoteId,
-                    );
-                  } else {
-                    miOSDiscoveryList.add(
-                      blue.BluetoothDevice(remoteId: result.device.remoteId),
-                    );
-                  }
+                //                if (result.device.advName.isNotEmpty) {
+                if (existingIndex >= 0) {
+                  miOSDiscoveryList[existingIndex] = blue.BluetoothDevice(
+                    remoteId: result.device.remoteId,
+                  );
+                } else {
+                  miOSDiscoveryList.add(
+                    blue.BluetoothDevice(remoteId: result.device.remoteId),
+                  );
+                  //                  }
                 }
               }
               notifyListeners();
@@ -324,16 +263,16 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
                   (element) =>
                       element.remoteId.str == result.device.remoteId.str,
                 );
-                if (result.device.advName.isNotEmpty) {
-                  if (existingIndex >= 0) {
-                    miOSDiscoveryList[existingIndex] = blue.BluetoothDevice(
-                      remoteId: result.device.remoteId,
-                    );
-                  } else {
-                    miOSDiscoveryList.add(
-                      blue.BluetoothDevice(remoteId: result.device.remoteId),
-                    );
-                  }
+                //  if (result.device.advName.isNotEmpty) {
+                if (existingIndex >= 0) {
+                  miOSDiscoveryList[existingIndex] = blue.BluetoothDevice(
+                    remoteId: result.device.remoteId,
+                  );
+                } else {
+                  miOSDiscoveryList.add(
+                    blue.BluetoothDevice(remoteId: result.device.remoteId),
+                  );
+                  //    }
                 }
               }
               notifyListeners();
@@ -493,7 +432,7 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
             print(
               ">>> view model: onClickConnect(): device is not connected yet.",
             );
-            await item.connect(timeout: 5);
+            await item.connect(timeout: Duration(seconds: 6));
             print(
               ">>> view model:${item.advName}: Connecteing Result: ${item.isConnected}",
             );
@@ -518,7 +457,7 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
             print(
               ">>> view model: onClickConnect(): device is not connected yet.",
             );
-            await item.connect(timeout: 5);
+            await item.connect(timeout: Duration(seconds: 6));
             print(
               ">>> view model:${item.advName}: Connecteing Result: ${item.isConnected}",
             );
@@ -644,37 +583,18 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
               title: StringUtils.txtDescription,
               hint: StringUtils.txtDescription,
               name: discoveryResult.advName ?? '',
-              onClickSave: (String text) {
+              description: discoveryResult.advName ?? '',
+              onClickSave: (String userName, String description) {
                 DeviceModel deviceModel = DeviceModel();
                 deviceModel.id = discoveryResult.remoteId.str;
-                deviceModel.name = discoveryResult.advName;
-                deviceModel.description = text;
+                deviceModel.name = userName;
+                deviceModel.description = description;
                 deviceModel.status = DeviceStatus.connected;
                 deviceModel.created = Timestamp.fromDate(DateTime.now());
                 onAddDeviceToHome(context, deviceModel);
               },
             ),
       );
-      /*
-      showDialog(
-        context: context,
-        builder:
-            (BuildContext dlgContext) => EditTextDlg(
-              title: StringUtils.txtDescription,
-              hint: StringUtils.txtDescription,
-              name: discoveryResult.name ?? '',
-              onClickSave: (String text) {
-                DeviceModel deviceModel = DeviceModel();
-                deviceModel.id = discoveryResult.address;
-                deviceModel.name = discoveryResult.name;
-                deviceModel.description = text;
-                deviceModel.status = DeviceStatus.connected;
-                deviceModel.created = Timestamp.fromDate(DateTime.now());
-                onAddDeviceToHome(context, deviceModel);
-              },
-            ),
-      );
-      */
     } else if (Platform.isIOS) {
       showDialog(
         context: context,
@@ -683,11 +603,17 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
               title: StringUtils.txtDescription,
               hint: StringUtils.txtDescription,
               name: discoveryResult.advName ?? '',
-              onClickSave: (String text) {
+              description:
+                  discoveryResult.advName.isNotEmpty
+                      ? discoveryResult.advName
+                      : discoveryResult.platfromName.isNotEmpty
+                      ? discoveryResult.platfromName
+                      : '',
+              onClickSave: (String userName, String description) {
                 DeviceModel deviceModel = DeviceModel();
                 deviceModel.id = discoveryResult.remoteId.str;
-                deviceModel.name = discoveryResult.advName;
-                deviceModel.description = text;
+                deviceModel.name = userName;
+                deviceModel.description = description;
                 deviceModel.status = DeviceStatus.connected;
                 deviceModel.created = Timestamp.fromDate(DateTime.now());
                 onAddDeviceToHome(context, deviceModel);
@@ -698,9 +624,7 @@ class BluetoothPairViewModel extends BaseViewModel with WidgetsBindingObserver {
   }
 
   onAddDeviceToHome(BuildContext context, DeviceModel deviceModel) async {
-    print("objectaa");
     HomeData? data = await sharedService.getHomeData();
-    print("object");
     if (data == null) {
       data = HomeData();
       data.deviceList = [];

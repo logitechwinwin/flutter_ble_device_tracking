@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:device_tracking/model/common/device_status.dart';
 import 'package:device_tracking/utils/string_utils.dart';
 import 'package:device_tracking/utils/widget_utils.dart';
+import 'package:device_tracking/views/main/device_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,8 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
         }
       }
     }
+
+    sharedService.saveHomeData(homeData);
     notifyListeners();
   }
 
@@ -166,7 +169,6 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
         }
 
         if (Platform.isAndroid) {
-          homeData.deviceList?[whereIndex].status = DeviceStatus.disconnected;
           List<blue.BluetoothDevice> connectedDevices =
               blue.FlutterBluePlus.connectedDevices;
           final existingIndex = connectedDevices.indexWhere(
@@ -176,12 +178,13 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
           if (existingIndex >= 0) {
             try {
               await connectedDevices[existingIndex].disconnect(timeout: 5);
+              homeData.deviceList?[whereIndex].status =
+                  DeviceStatus.disconnected;
             } catch (e) {
               print("Error disconnecting: $e");
             }
           }
         } else if (Platform.isIOS) {
-          homeData.deviceList?[whereIndex].status = DeviceStatus.disconnected;
           List<blue.BluetoothDevice> connectedDevices =
               blue.FlutterBluePlus.connectedDevices;
           final existingIndex = connectedDevices.indexWhere(
@@ -190,6 +193,8 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
           if (existingIndex >= 0) {
             try {
               await connectedDevices[existingIndex].disconnect(timeout: 5);
+              homeData.deviceList?[whereIndex].status =
+                  DeviceStatus.disconnected;
             } catch (e) {
               print("Error disconnecting: $e");
             }
@@ -238,5 +243,31 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
         notifyListeners();
       });
     } else if (Platform.isIOS) {}
+  }
+
+  void onClickItemName(BuildContext context, DeviceModel item) async {
+    await DeviceView().launch(context);
+    // Navigator.push(context, Builder(builder: (context) => DeviceView(DeviceModel: item)));
+    if (context.mounted) {
+      initialize(context);
+    }
+    notifyListeners();
+  }
+
+  void onChangeItemInfo(BuildContext context, DeviceModel item) async {
+    HomeData? homeData = await sharedService.getHomeData();
+    if (homeData != null) {
+      mList = homeData.deviceList ?? [];
+      final whereIndex = mList.indexWhere((element) => element.id == item.id);
+      if (whereIndex >= 0) {
+        mList[whereIndex].name = item.name;
+        mList[whereIndex].description = item.description;
+        sharedService.saveHomeData(homeData);
+        if (context.mounted) {
+          initialize(context);
+        }
+        notifyListeners();
+      }
+    }
   }
 }

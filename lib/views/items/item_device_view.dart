@@ -11,14 +11,16 @@ class ItemDeviceView extends StatefulWidget {
     super.key,
     required this.model,
     required this.onDelete,
-    required this.onAddRemove,
+    required this.onDescriptionClicked,
     required this.onStatusClicked,
+    required this.onNameClicked,
   });
 
   final DeviceModel model;
   final VoidCallback onDelete;
-  final Function onAddRemove;
+  final Function onDescriptionClicked;
   final Function onStatusClicked;
+  final Function onNameClicked;
 
   @override
   ItemDeviceViewState createState() => ItemDeviceViewState();
@@ -39,23 +41,33 @@ class ItemDeviceViewState extends State<ItemDeviceView> {
               width: width * 0.2,
               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
               alignment: Alignment.centerLeft,
-              child: textView(
-                widget.model.name ?? '',
-                fontSize: SizeUtils.textSizeMedium,
-                fontWeight: FontWeight.w400,
-                textColor: ColorUtils.appColorWhite,
-                maxLine: 1,
+              child: GestureDetector(
+                onTap: () {
+                  widget.onNameClicked();
+                },
+                child: textView(
+                  widget.model.name ?? '',
+                  fontSize: SizeUtils.textSizeMedium,
+                  fontWeight: FontWeight.w400,
+                  textColor: ColorUtils.appColorWhite,
+                  maxLine: 1,
+                ),
               ),
             ),
             Container(
               width: width * 0.3,
               alignment: Alignment.centerLeft,
-              child: textView(
-                widget.model.description ?? '',
-                fontSize: SizeUtils.textSizeMedium,
-                fontWeight: FontWeight.w400,
-                textColor: ColorUtils.appColorWhite,
-                maxLine: 1,
+              child: GestureDetector(
+                onTap: () {
+                  widget.onDescriptionClicked();
+                },
+                child: textView(
+                  widget.model.description ?? '',
+                  fontSize: SizeUtils.textSizeMedium,
+                  fontWeight: FontWeight.w400,
+                  textColor: ColorUtils.appColorWhite,
+                  maxLine: 1,
+                ),
               ),
             ),
             Container(
@@ -63,7 +75,7 @@ class ItemDeviceViewState extends State<ItemDeviceView> {
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: () {
-                  widget.onStatusClicked(); 
+                  widget.onStatusClicked();
                 },
                 child: textView(
                   widget.model.status ?? '',
@@ -78,7 +90,7 @@ class ItemDeviceViewState extends State<ItemDeviceView> {
               ),
             ),
             SizedBox(
-              width: width * 0.1,
+              width: width * 0.15,
               child: CircleAvatar(
                 radius: 15,
                 backgroundColor: ColorUtils.appColorTransparent,

@@ -28,7 +28,15 @@ class ProfileView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       viewModelBuilder: () => ProfileViewModel(),
       builder: (context, model, child) => buildWidget(context, model, child),
-      onViewModelReady: (model) => model.initialize(context),
+      onViewModelReady:
+          (model) => model.initialize(
+            context,
+            textEditingControllerName,
+            textEditingControllerEmail,
+            textEditingControllerRecoveryEmail,
+            textEditingControllerPassword,
+            textEditingControllerConfirmPassword,
+          ),
     );
   }
 
@@ -213,38 +221,6 @@ class ProfileView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              // Container(
-                              //   width: width,
-                              //   alignment: Alignment.center,
-                              //   padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-                              //   child: Row(
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     mainAxisAlignment:
-                              //         MainAxisAlignment.spaceAround,
-                              //     // children: [
-                              //     //   textView(
-                              //     //     StringUtils.txtAlreadyHaveAnAccount,
-                              //     //     textColor: ColorUtils.appColorWhite_80,
-                              //     //     fontSize: SizeUtils.textSizeMedium,
-                              //     //     fontWeight: FontWeight.w400,
-                              //     //     isCentered: false,
-                              //     //   ),
-                              //     //   const SizedBox(width: 10),
-                              //     //   GestureDetector(
-                              //     //     child: textViewUnderline(
-                              //     //       StringUtils.txtSignin,
-                              //     //       textColor: ColorUtils.appColorWhite,
-                              //     //       fontSize: SizeUtils.textSizeLarge,
-                              //     //       fontWeight: FontWeight.w500,
-                              //     //       isCentered: false,
-                              //     //     ),
-                              //     //     onTap: () {
-                              //     //       model.onClickBack(context);
-                              //     //     },
-                              //     //   ),
-                              //     // ],
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

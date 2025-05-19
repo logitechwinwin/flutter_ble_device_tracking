@@ -22,19 +22,25 @@ class ExitDialog extends StatelessWidget {
       shadowColor: ColorUtils.appColorBlack,
       contentPadding: const EdgeInsets.all(20),
       backgroundColor: Colors.white,
-      content: Text(StringUtils.txtDoYouWantToExit,
-          style: primaryTextStyle(color: ColorUtils.appColorBlack)),
+      content: Text(
+        StringUtils.txtDoYouWantToExit,
+        style: primaryTextStyle(color: ColorUtils.appColorBlack),
+      ),
       actions: [
         TextButton(
-          child: Text(StringUtils.txtCancel,
-              style: secondaryTextStyle(color: ColorUtils.appColorBlack)),
+          child: Text(
+            StringUtils.txtCancel,
+            style: secondaryTextStyle(color: ColorUtils.appColorBlack),
+          ),
           onPressed: () {
             finish(context);
           },
         ),
         TextButton(
-          child: Text(StringUtils.txtExit,
-              style: secondaryTextStyle(color: ColorUtils.appColorPrimary)),
+          child: Text(
+            StringUtils.txtExit,
+            style: secondaryTextStyle(color: ColorUtils.appColorPrimary),
+          ),
           onPressed: () {
             finish(context);
             if (Platform.isAndroid) {
@@ -75,12 +81,16 @@ class CustomDialog extends StatelessWidget {
       shadowColor: ColorUtils.appColorWhite_20,
       contentPadding: const EdgeInsets.all(15),
       backgroundColor: ColorUtils.appColorPrimary,
-      content: Text(description,
-          style: primaryTextStyle(color: ColorUtils.appColorWhite)),
+      content: Text(
+        description,
+        style: primaryTextStyle(color: ColorUtils.appColorWhite),
+      ),
       actions: [
         TextButton(
-          child: Text(cancelButtonStr,
-              style: secondaryTextStyle(color: ColorUtils.appColorWhite)),
+          child: Text(
+            cancelButtonStr,
+            style: secondaryTextStyle(color: ColorUtils.appColorWhite),
+          ),
           onPressed: () {
             finish(context);
             if (cancelClicked != null) {
@@ -89,8 +99,10 @@ class CustomDialog extends StatelessWidget {
           },
         ),
         TextButton(
-          child: Text(okButtonStr,
-              style: secondaryTextStyle(color: ColorUtils.appColorGreen)),
+          child: Text(
+            okButtonStr,
+            style: secondaryTextStyle(color: ColorUtils.appColorGreen),
+          ),
           onPressed: () {
             finish(context);
             okClicked();
@@ -202,34 +214,35 @@ Widget textViewUnderline(
 
 // ignore: must_be_immutable
 class EditTextField extends StatefulWidget {
-  EditTextField(
-      {super.key,
-      required this.hintText,
-      required this.isPassword,
-      required this.isSecure,
-      required this.mController,
-      this.prefixIcon,
-      this.onTap,
-      this.isEnable,
-      this.isReadOnly,
-      this.enableInteractiveSelection,
-      this.textInputType,
-      this.inputFormatters,
-      this.autoFocus,
-      this.cursorColor,
-      this.hintColor,
-      this.labelColor,
-      this.borderColor,
-      this.backgroundColor,
-      this.borderRadius,
-      this.textColor,
-      this.fontFamily,
-      this.fontWeight,
-      this.fontSize,
-      this.isCentered,
-      this.maxLine,
-      this.latterSpacing,
-      this.lineThrough});
+  EditTextField({
+    super.key,
+    required this.hintText,
+    required this.isPassword,
+    required this.isSecure,
+    required this.mController,
+    this.prefixIcon,
+    this.onTap,
+    this.isEnable,
+    this.isReadOnly,
+    this.enableInteractiveSelection,
+    this.textInputType,
+    this.inputFormatters,
+    this.autoFocus,
+    this.cursorColor,
+    this.hintColor,
+    this.labelColor,
+    this.borderColor,
+    this.backgroundColor,
+    this.borderRadius,
+    this.textColor,
+    this.fontFamily,
+    this.fontWeight,
+    this.fontSize,
+    this.isCentered,
+    this.maxLine,
+    this.latterSpacing,
+    this.lineThrough,
+  });
 
   String hintText;
   bool isPassword;
@@ -268,170 +281,176 @@ class EditTextFieldState extends State<EditTextField> {
   Widget build(BuildContext context) {
     if (widget.isSecure) {
       return Padding(
-          padding: const EdgeInsets.all(5),
-          child: TextField(
-            style: GoogleFonts.poppins(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeSMedium,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor ?? ColorUtils.appColorBlack,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.all(5),
+        child: TextField(
+          style: GoogleFonts.poppins(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeSMedium,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor ?? ColorUtils.appColorBlack,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding: const EdgeInsets.fromLTRB(20, 10, 5, 10),
+            hintText: widget.hintText,
+            labelText: widget.hintText,
+            prefixIcon: widget.prefixIcon ?? Container(width: 0),
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-                contentPadding: const EdgeInsets.fromLTRB(20, 10, 5, 10),
-                hintText: widget.hintText,
-                labelText: widget.hintText,
-                prefixIcon: widget.prefixIcon ?? Container(width: 0,),
-                hintStyle: TextStyle(
-                    color: widget.hintColor ?? ColorUtils.appColorTextLight),
-                labelStyle: TextStyle(
-                    color: widget.labelColor ?? ColorUtils.appColorTextLight,
-                    fontSize: SizeUtils.textSizeSMedium),
-                filled: true,
-                fillColor:
-                    widget.backgroundColor ?? ColorUtils.appColorGreyLight,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.borderRadius ?? 30.0),
-                  borderSide: BorderSide(
-                      color:
-                          widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.borderRadius ?? 30.0),
-                  borderSide: BorderSide(
-                      color:
-                          widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
-                ),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      widget.isPassword = !widget.isPassword;
-                    });
-                  },
-                  child: Icon(
-                      widget.isPassword
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: ColorUtils.appColorWhite_80),
-                )),
-            cursorColor: widget.cursorColor ?? ColorUtils.appColorBlack,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            maxLines: widget.maxLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.text,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            readOnly: widget.isReadOnly ?? false,
-            enabled: widget.isEnable ?? true,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+            labelStyle: TextStyle(
+              color: widget.labelColor ?? ColorUtils.appColorTextLight,
+              fontSize: SizeUtils.textSizeSMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorGreyLight,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 30.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 30.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.isPassword = !widget.isPassword;
+                });
+              },
+              child: Icon(
+                widget.isPassword
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: ColorUtils.appColorWhite_80,
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? ColorUtils.appColorBlack,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          maxLines: widget.maxLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.text,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          readOnly: widget.isReadOnly ?? false,
+          enabled: widget.isEnable ?? true,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     } else {
       return Padding(
-          padding: const EdgeInsets.all(5),
-          child: TextField(
-            style: GoogleFonts.poppins(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeSMedium,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor ?? ColorUtils.appColorBlack,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.all(5),
+        child: TextField(
+          style: GoogleFonts.poppins(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeSMedium,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor ?? ColorUtils.appColorBlack,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding: const EdgeInsets.fromLTRB(25, 8, 4, 8),
+            hintText: widget.hintText,
+            labelText: widget.hintText,
+            prefixIcon: widget.prefixIcon ?? Container(width: 0),
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              contentPadding: const EdgeInsets.fromLTRB(25, 8, 4, 8),
-              hintText: widget.hintText,
-              labelText: widget.hintText,
-              prefixIcon: widget.prefixIcon ?? Container(width: 0,),
-              hintStyle: TextStyle(
-                  color: widget.hintColor ?? ColorUtils.appColorTextLight),
-              labelStyle: TextStyle(
-                  color: widget.labelColor ?? ColorUtils.appColorTextLight,
-                  fontSize: SizeUtils.textSizeSMedium),
-              filled: true,
-              fillColor: widget.backgroundColor ?? ColorUtils.appColorGreyLight,
-              enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(widget.borderRadius ?? 30.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(widget.borderRadius ?? 30.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
+            labelStyle: TextStyle(
+              color: widget.labelColor ?? ColorUtils.appColorTextLight,
+              fontSize: SizeUtils.textSizeSMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorGreyLight,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 30.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
               ),
             ),
-            cursorColor: widget.cursorColor ?? ColorUtils.appColorBlack,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            maxLines: widget.maxLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.text,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            readOnly: widget.isReadOnly ?? false,
-            enabled: widget.isEnable ?? true,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 30.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? ColorUtils.appColorBlack,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          maxLines: widget.maxLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.text,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          readOnly: widget.isReadOnly ?? false,
+          enabled: widget.isEnable ?? true,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     }
   }
 }
 
 // ignore: must_be_immutable
 class EditTextFieldWithoutLabel extends StatefulWidget {
-  EditTextFieldWithoutLabel(
-      {super.key,
-      required this.hintText,
-      required this.isPassword,
-      required this.isSecure,
-      required this.mController,
-      required this.textColor,
-      this.onTap,
-      this.focusNode,
-      this.textInputAction,
-      this.isEnable,
-      this.readOnly,
-      this.enableInteractiveSelection,
-      this.textInputType,
-      this.textCapitalization,
-      this.inputFormatters,
-      this.autoFocus,
-      this.cursorColor,
-      this.hintColor,
-      this.borderColor,
-      this.backgroundColor,
-      this.borderRadius,
-      this.fontFamily,
-      this.fontWeight,
-      this.fontSize,
-      this.isCentered,
-      this.maxLine,
-      this.minLine,
-      this.latterSpacing,
-      this.lineThrough});
+  EditTextFieldWithoutLabel({
+    super.key,
+    required this.hintText,
+    required this.isPassword,
+    required this.isSecure,
+    required this.mController,
+    required this.textColor,
+    this.onTap,
+    this.focusNode,
+    this.textInputAction,
+    this.isEnable,
+    this.readOnly,
+    this.enableInteractiveSelection,
+    this.textInputType,
+    this.textCapitalization,
+    this.inputFormatters,
+    this.autoFocus,
+    this.cursorColor,
+    this.hintColor,
+    this.borderColor,
+    this.backgroundColor,
+    this.borderRadius,
+    this.fontFamily,
+    this.fontWeight,
+    this.fontSize,
+    this.isCentered,
+    this.maxLine,
+    this.minLine,
+    this.latterSpacing,
+    this.lineThrough,
+  });
   String hintText;
   bool isPassword;
   bool isSecure;
@@ -472,174 +491,180 @@ class EditTextFieldWithoutLabelState extends State<EditTextFieldWithoutLabel> {
   Widget build(BuildContext context) {
     if (widget.isSecure) {
       return Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: TextField(
-            focusNode: widget.focusNode,
-            style: TextStyle(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeNormal,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child: TextField(
+          focusNode: widget.focusNode,
+          style: TextStyle(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeNormal,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            hintText: widget.hintText,
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                hintText: widget.hintText,
-                hintStyle: TextStyle(
-                    color: widget.hintColor ?? ColorUtils.appColorTextLight),
-                labelStyle: TextStyle(
-                    color: widget.hintColor ?? widget.textColor,
-                    fontSize: SizeUtils.textSizeMedium),
-                filled: true,
-                fillColor:
-                    widget.backgroundColor ?? ColorUtils.appColorTransparent,
-                enabledBorder: UnderlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.borderRadius ?? 0.0),
-                  borderSide: BorderSide(
-                      color:
-                          widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
+            labelStyle: TextStyle(
+              color: widget.hintColor ?? widget.textColor,
+              fontSize: SizeUtils.textSizeMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorTransparent,
+            enabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.isPassword = !widget.isPassword;
+                });
+              },
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                child: Icon(
+                  widget.isPassword ? Icons.visibility : Icons.visibility_off,
+                  color: widget.textColor,
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.borderRadius ?? 0.0),
-                  borderSide: BorderSide(
-                      color:
-                          widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
-                ),
-                suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        widget.isPassword = !widget.isPassword;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                      child: Icon(
-                          widget.isPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: widget.textColor),
-                    ))),
-            cursorColor: widget.cursorColor ?? widget.textColor,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            maxLines: widget.maxLine ?? 1,
-            minLines: widget.minLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.multiline,
-            textInputAction: widget.textInputAction ?? TextInputAction.newline,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            enabled: widget.isEnable ?? true,
-            readOnly: widget.readOnly ?? false,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? widget.textColor,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          maxLines: widget.maxLine ?? 1,
+          minLines: widget.minLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.multiline,
+          textInputAction: widget.textInputAction ?? TextInputAction.newline,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          enabled: widget.isEnable ?? true,
+          readOnly: widget.readOnly ?? false,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     } else {
       return Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: TextField(
-            focusNode: widget.focusNode,
-            style: TextStyle(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeNormal,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child: TextField(
+          focusNode: widget.focusNode,
+          style: TextStyle(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeNormal,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            hintText: widget.hintText,
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              hintText: widget.hintText,
-              hintStyle: TextStyle(
-                  color: widget.hintColor ?? ColorUtils.appColorTextLight),
-              labelStyle: TextStyle(
-                  color: widget.hintColor ?? widget.textColor,
-                  fontSize: SizeUtils.textSizeMedium),
-              filled: true,
-              fillColor:
-                  widget.backgroundColor ?? ColorUtils.appColorTransparent,
-              enabledBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
+            labelStyle: TextStyle(
+              color: widget.hintColor ?? widget.textColor,
+              fontSize: SizeUtils.textSizeMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorTransparent,
+            enabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
               ),
             ),
-            cursorColor: widget.cursorColor ?? widget.textColor,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            textCapitalization:
-                widget.textCapitalization ?? TextCapitalization.sentences,
-            maxLines: widget.maxLine ?? 1,
-            minLines: widget.minLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.multiline,
-            textInputAction: widget.textInputAction ?? TextInputAction.newline,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            enabled: widget.isEnable ?? true,
-            readOnly: widget.readOnly ?? false,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? widget.textColor,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          textCapitalization:
+              widget.textCapitalization ?? TextCapitalization.sentences,
+          maxLines: widget.maxLine ?? 1,
+          minLines: widget.minLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.multiline,
+          textInputAction: widget.textInputAction ?? TextInputAction.newline,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          enabled: widget.isEnable ?? true,
+          readOnly: widget.readOnly ?? false,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     }
   }
 }
 
 // ignore: must_be_immutable
 class EditTextFieldRound extends StatefulWidget {
-  EditTextFieldRound(
-      {super.key,
-      required this.hintText,
-      required this.isPassword,
-      required this.isSecure,
-      required this.mController,
-      required this.textColor,
-      this.onTap,
-      this.focusNode,
-      this.textInputAction,
-      this.isEnable,
-      this.readOnly,
-      this.enableInteractiveSelection,
-      this.textInputType,
-      this.textCapitalization,
-      this.inputFormatters,
-      this.autoFocus,
-      this.cursorColor,
-      this.hintColor,
-      this.borderColor,
-      this.backgroundColor,
-      this.borderRadius,
-      this.fontFamily,
-      this.fontWeight,
-      this.fontSize,
-      this.isCentered,
-      this.maxLine,
-      this.minLine,
-      this.latterSpacing,
-      this.contentPadding,
-      this.lineThrough});
+  EditTextFieldRound({
+    super.key,
+    required this.hintText,
+    required this.isPassword,
+    required this.isSecure,
+    required this.mController,
+    required this.textColor,
+    this.onTap,
+    this.focusNode,
+    this.textInputAction,
+    this.isEnable,
+    this.readOnly,
+    this.enableInteractiveSelection,
+    this.textInputType,
+    this.textCapitalization,
+    this.inputFormatters,
+    this.autoFocus,
+    this.cursorColor,
+    this.hintColor,
+    this.borderColor,
+    this.backgroundColor,
+    this.borderRadius,
+    this.fontFamily,
+    this.fontWeight,
+    this.fontSize,
+    this.isCentered,
+    this.maxLine,
+    this.minLine,
+    this.latterSpacing,
+    this.contentPadding,
+    this.lineThrough,
+  });
   String hintText;
   bool isPassword;
   bool isSecure;
@@ -680,137 +705,146 @@ class EditTextFieldRoundState extends State<EditTextFieldRound> {
   Widget build(BuildContext context) {
     if (widget.isSecure) {
       return Padding(
-          padding: const EdgeInsets.all(0),
-          child: TextField(
-            focusNode: widget.focusNode,
-            style: TextStyle(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeMedium,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.all(0),
+        child: TextField(
+          focusNode: widget.focusNode,
+          style: TextStyle(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeMedium,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            contentPadding:
+                widget.contentPadding ?? const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            hintText: widget.hintText,
+            //labelText: widget.hintText,
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-                contentPadding: widget.contentPadding ??
-                    const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                hintText: widget.hintText,
-                //labelText: widget.hintText,
-                hintStyle: TextStyle(
-                    color: widget.hintColor ?? ColorUtils.appColorTextLight),
-                labelStyle: TextStyle(
-                    color: widget.hintColor ?? widget.textColor,
-                    fontSize: SizeUtils.textSizeMedium),
-                filled: true,
-                fillColor:
-                    widget.backgroundColor ?? ColorUtils.appColorTransparent,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                  borderSide: BorderSide(
-                      color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
+            labelStyle: TextStyle(
+              color: widget.hintColor ?? widget.textColor,
+              fontSize: SizeUtils.textSizeMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorTransparent,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.isPassword = !widget.isPassword;
+                });
+              },
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                child: Icon(
+                  widget.isPassword ? Icons.visibility : Icons.visibility_off,
+                  color: widget.textColor,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                  borderSide: BorderSide(
-                      color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                      width: 1),
-                ),
-                suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        widget.isPassword = !widget.isPassword;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                      child: Icon(
-                          widget.isPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: widget.textColor),
-                    ))),
-            cursorColor: widget.cursorColor ?? widget.textColor,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            maxLines: widget.maxLine ?? 1,
-            minLines: widget.minLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.multiline,
-            textInputAction: widget.textInputAction ?? TextInputAction.newline,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            enabled: widget.isEnable ?? true,
-            readOnly: widget.readOnly ?? false,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? widget.textColor,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          maxLines: widget.maxLine ?? 1,
+          minLines: widget.minLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.multiline,
+          textInputAction: widget.textInputAction ?? TextInputAction.newline,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          enabled: widget.isEnable ?? true,
+          readOnly: widget.readOnly ?? false,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     } else {
       return Padding(
-          padding: const EdgeInsets.all(0),
-          child: TextField(
-            focusNode: widget.focusNode,
-            style: TextStyle(
-              fontStyle: widget.fontFamily ?? FontStyle.normal,
-              fontSize: widget.fontSize ?? SizeUtils.textSizeMedium,
-              fontWeight: widget.fontWeight ?? FontWeight.normal,
-              color: widget.textColor,
-              height: 1.5,
-              letterSpacing: widget.latterSpacing ?? 0.5,
-              decoration: widget.lineThrough ?? false
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
+        padding: const EdgeInsets.all(0),
+        child: TextField(
+          focusNode: widget.focusNode,
+          style: TextStyle(
+            fontStyle: widget.fontFamily ?? FontStyle.normal,
+            fontSize: widget.fontSize ?? SizeUtils.textSizeMedium,
+            fontWeight: widget.fontWeight ?? FontWeight.normal,
+            color: widget.textColor,
+            height: 1.5,
+            letterSpacing: widget.latterSpacing ?? 0.5,
+            decoration:
+                widget.lineThrough ?? false
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+          ),
+          controller: widget.mController,
+          obscureText: widget.isPassword,
+          decoration: InputDecoration(
+            contentPadding:
+                widget.contentPadding ?? const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            hintText: widget.hintText,
+            //labelText: widget.hintText,
+            hintStyle: TextStyle(
+              color: widget.hintColor ?? ColorUtils.appColorTextLight,
             ),
-            controller: widget.mController,
-            obscureText: widget.isPassword,
-            decoration: InputDecoration(
-              contentPadding: widget.contentPadding ??
-                  const EdgeInsets.fromLTRB(0, 5, 0, 5),
-              hintText: widget.hintText,
-              //labelText: widget.hintText,
-              hintStyle: TextStyle(
-                  color: widget.hintColor ?? ColorUtils.appColorTextLight),
-              labelStyle: TextStyle(
-                  color: widget.hintColor ?? widget.textColor,
-                  fontSize: SizeUtils.textSizeMedium),
-              filled: true,
-              fillColor:
-                  widget.backgroundColor ?? ColorUtils.appColorTransparent,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
-                borderSide: BorderSide(
-                    color: widget.borderColor ?? ColorUtils.appColorTransparent,
-                    width: 1),
+            labelStyle: TextStyle(
+              color: widget.hintColor ?? widget.textColor,
+              fontSize: SizeUtils.textSizeMedium,
+            ),
+            filled: true,
+            fillColor: widget.backgroundColor ?? ColorUtils.appColorTransparent,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
               ),
             ),
-            cursorColor: widget.cursorColor ?? widget.textColor,
-            textAlign:
-                widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
-            textCapitalization:
-                widget.textCapitalization ?? TextCapitalization.sentences,
-            maxLines: widget.maxLine ?? 1,
-            minLines: widget.minLine ?? 1,
-            autofocus: widget.autoFocus ?? false,
-            keyboardType: widget.textInputType ?? TextInputType.multiline,
-            textInputAction: widget.textInputAction ?? TextInputAction.newline,
-            inputFormatters: widget.inputFormatters ?? [],
-            onTap: widget.onTap,
-            enabled: widget.isEnable ?? true,
-            readOnly: widget.readOnly ?? false,
-            enableInteractiveSelection:
-                widget.enableInteractiveSelection ?? true,
-          ));
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0.0),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorUtils.appColorTransparent,
+                width: 1,
+              ),
+            ),
+          ),
+          cursorColor: widget.cursorColor ?? widget.textColor,
+          textAlign:
+              widget.isCentered ?? false ? TextAlign.center : TextAlign.start,
+          textCapitalization:
+              widget.textCapitalization ?? TextCapitalization.sentences,
+          maxLines: widget.maxLine ?? 1,
+          minLines: widget.minLine ?? 1,
+          autofocus: widget.autoFocus ?? false,
+          keyboardType: widget.textInputType ?? TextInputType.multiline,
+          textInputAction: widget.textInputAction ?? TextInputAction.newline,
+          inputFormatters: widget.inputFormatters ?? [],
+          onTap: widget.onTap,
+          enabled: widget.isEnable ?? true,
+          readOnly: widget.readOnly ?? false,
+          enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
+        ),
+      );
     }
   }
 }
@@ -825,12 +859,13 @@ class WalkThrough extends StatelessWidget {
   final String walkImg;
   final String? backImg;
 
-  const WalkThrough(
-      {super.key,
-      this.textTitle,
-      this.textContent,
-      required this.walkImg,
-      this.backImg});
+  const WalkThrough({
+    super.key,
+    this.textTitle,
+    this.textContent,
+    required this.walkImg,
+    this.backImg,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -850,11 +885,7 @@ class WalkThrough extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.asset(
-                walkImg,
-                width: width * 0.4,
-                fit: BoxFit.cover,
-              ),
+              Image.asset(walkImg, width: width * 0.4, fit: BoxFit.cover),
               Container(
                 width: width * 0.8,
                 padding: const EdgeInsets.all(10),
@@ -870,11 +901,13 @@ class WalkThrough extends StatelessWidget {
               Container(
                 width: width * 0.8,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: textView(textContent,
-                    textColor: ColorUtils.appColorWhite,
-                    fontSize: SizeUtils.textSizeSMedium,
-                    isCentered: true),
-              )
+                child: textView(
+                  textContent,
+                  textColor: ColorUtils.appColorWhite,
+                  fontSize: SizeUtils.textSizeSMedium,
+                  isCentered: true,
+                ),
+              ),
             ],
           ),
         ),
@@ -883,16 +916,18 @@ class WalkThrough extends StatelessWidget {
   }
 }
 
-BoxDecoration boxDecoration(
-    {double? radius,
-    Color? borderColor,
-    Color? bgColor,
-    var showShadow = false}) {
+BoxDecoration boxDecoration({
+  double? radius,
+  Color? borderColor,
+  Color? bgColor,
+  var showShadow = false,
+}) {
   return BoxDecoration(
     color: bgColor ?? ColorUtils.appColorAccent,
-    boxShadow: showShadow
-        ? defaultBoxShadow(shadowColor: shadowColorGlobal)
-        : [const BoxShadow(color: Colors.transparent)],
+    boxShadow:
+        showShadow
+            ? defaultBoxShadow(shadowColor: shadowColorGlobal)
+            : [const BoxShadow(color: Colors.transparent)],
     border: Border.all(color: borderColor ?? ColorUtils.appColorAccent),
     borderRadius: BorderRadius.all(Radius.circular(radius ?? 10)),
   );
@@ -941,23 +976,27 @@ class RoundButtonState extends State<RoundButton> {
       elevation: widget.elevation ?? 1,
       color: widget.backgroundColor ?? ColorUtils.appColorAccent,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(widget.radius ?? 10),
-          side: BorderSide(
-            color: widget.isStroked
-                ? widget.strokeColor ?? ColorUtils.appColorAccent
-                : ColorUtils.appColorTransparent,
-          )),
+        borderRadius: BorderRadius.circular(widget.radius ?? 10),
+        side: BorderSide(
+          color:
+              widget.isStroked
+                  ? widget.strokeColor ?? ColorUtils.appColorAccent
+                  : ColorUtils.appColorTransparent,
+        ),
+      ),
       child: Container(
         height: widget.height ?? 40,
-        padding: widget.padding ?? const EdgeInsets.fromLTRB(25, 5, 25, 5),
+        padding: widget.padding ?? const EdgeInsets.fromLTRB(15, 5, 15, 5),
         alignment: Alignment.center,
-        child: textView(widget.textContent,
-            fontSize: widget.textSize ?? SizeUtils.textSizeNormal,
-            textColor: widget.textColor ?? ColorUtils.appColorWhite,
-            fontWeight: FontWeight.w500,
-            textAllCaps: widget.isAllCaps ?? false,
-            isCentered: true,
-            maxLine: 2),
+        child: textView(
+          widget.textContent,
+          fontSize: widget.textSize ?? SizeUtils.textSizeNormal,
+          textColor: widget.textColor ?? ColorUtils.appColorWhite,
+          fontWeight: FontWeight.w500,
+          textAllCaps: widget.isAllCaps ?? false,
+          isCentered: true,
+          maxLine: 2,
+        ),
       ),
     );
   }
@@ -1006,12 +1045,14 @@ class RoundButtonGradientState extends State<RoundButtonGradient> {
       onPressed: widget.onPressed,
       height: widget.height ?? 45,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(widget.radius ?? 10),
-          side: BorderSide(
-            color: widget.isStroked
-                ? widget.strokeColor ?? ColorUtils.appColorAccent
-                : ColorUtils.appColorTransparent,
-          )),
+        borderRadius: BorderRadius.circular(widget.radius ?? 10),
+        side: BorderSide(
+          color:
+              widget.isStroked
+                  ? widget.strokeColor ?? ColorUtils.appColorAccent
+                  : ColorUtils.appColorTransparent,
+        ),
+      ),
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -1020,19 +1061,21 @@ class RoundButtonGradientState extends State<RoundButtonGradient> {
             colors: [
               widget.gradientColorStart ?? ColorUtils.appColorPrimaryDark,
               widget.gradientColorCenter ?? ColorUtils.appColorPrimaryDark,
-              widget.gradientColorEnd ?? ColorUtils.appColorPrimary
+              widget.gradientColorEnd ?? ColorUtils.appColorPrimary,
             ],
           ),
         ),
         height: widget.height ?? 45,
         padding: widget.padding ?? const EdgeInsets.fromLTRB(25, 5, 25, 5),
         alignment: Alignment.center,
-        child: textView(widget.textContent,
-            fontSize: widget.textSize ?? SizeUtils.textSizeNormal,
-            textColor: widget.textColor ?? ColorUtils.appColorWhite,
-            fontWeight: FontWeight.w500,
-            textAllCaps: widget.isAllCaps ?? false,
-            isCentered: true),
+        child: textView(
+          widget.textContent,
+          fontSize: widget.textSize ?? SizeUtils.textSizeNormal,
+          textColor: widget.textColor ?? ColorUtils.appColorWhite,
+          fontWeight: FontWeight.w500,
+          textAllCaps: widget.isAllCaps ?? false,
+          isCentered: true,
+        ),
       ),
     );
   }
@@ -1041,39 +1084,42 @@ class RoundButtonGradientState extends State<RoundButtonGradient> {
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }
 
 void showMessage(String str, double? alignment) {
   BotToast.showCustomText(
-      toastBuilder: (cancelFunc) {
-        return Container(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-          margin: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-          decoration: BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: [
-            //     ColorUtils.appColorPrimaryDark,
-            //     ColorUtils.appColorPrimaryDark,
-            //     ColorUtils.appColorPrimary
-            //   ],
-            // ),
-            color: ColorUtils.appColorWhite,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(width: 1, color: ColorUtils.appColorPrimaryDark),
-          ),
-          child: textView(str,
-              textColor: ColorUtils.appColorBlack,
-              fontSize: SizeUtils.textSizeMedium,
-              maxLine: 50,
-              isCentered: true),
-        );
-      },
-      align: Alignment(0, alignment ?? 0.9));
+    toastBuilder: (cancelFunc) {
+      return Container(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+        margin: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+        decoration: BoxDecoration(
+          // gradient: LinearGradient(
+          //   begin: Alignment.topLeft,
+          //   end: Alignment.bottomRight,
+          //   colors: [
+          //     ColorUtils.appColorPrimaryDark,
+          //     ColorUtils.appColorPrimaryDark,
+          //     ColorUtils.appColorPrimary
+          //   ],
+          // ),
+          color: ColorUtils.appColorWhite,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(width: 1, color: ColorUtils.appColorPrimaryDark),
+        ),
+        child: textView(
+          str,
+          textColor: ColorUtils.appColorBlack,
+          fontSize: SizeUtils.textSizeMedium,
+          maxLine: 50,
+          isCentered: true,
+        ),
+      );
+    },
+    align: Alignment(0, alignment ?? 0.9),
+  );
 }
 
 class LoadingWidget extends StatelessWidget {
@@ -1085,8 +1131,9 @@ class LoadingWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          color: ColorUtils.appColorGreyDark,
-          borderRadius: const BorderRadius.all(Radius.circular(8))),
+        color: ColorUtils.appColorGreyDark,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
       child: CircularProgressIndicator(
         backgroundColor: ColorUtils.appColorWhite,
         color: ColorUtils.appColorPrimary.withAlpha(100),

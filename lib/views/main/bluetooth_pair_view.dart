@@ -186,36 +186,17 @@ class _BluetoothPairViewState extends State<BluetoothPairView>
     BluetoothPairViewModel model,
   ) {
     if (Platform.isAndroid) {
-      /*
-      return model.discoveryResultList.map((item) {
-        final device = item;
-        final address = device.address;
-
-        return ItemBluetoothPairedDeviceView(
-          title: device.name ?? '',
-          address: address,
-          device: device,
-          onItemClicked: () {
-            print(">>> view: onItemClicked()");
-            model.onDeviceClicked(context, item);
-          },
-          onClickConnect: () {
-            print(">>> view: onClickConnect()");
-            model.onClickConnect(context, item);
-          },
-          isDevicePaired: () { 
-            print(">>> view: isDevicePaired()");
-            model.isDevicePaired(item);
-          }
-        );
-      }).toList();
-    */
       return model.miOSDiscoveryList.map((item) {
         final device = item;
         final address = device.remoteId.str;
 
         return ItemBluetoothPairedDeviceView(
-          title: device.advName ?? 'Unknown-device',
+          title:
+              device.advName.isNotEmpty
+                  ? device.advName
+                  : device.platformName.isNotEmpty
+                  ? device.platformName
+                  : 'Unknown',
           address: address,
           device: device,
           onItemClicked: () {
@@ -238,7 +219,12 @@ class _BluetoothPairViewState extends State<BluetoothPairView>
         final address = device.remoteId.str;
 
         return ItemBluetoothPairedDeviceView(
-          title: device.advName ?? 'Unknown-device',
+          title:
+              device.advName.isNotEmpty
+                  ? device.advName
+                  : device.platformName.isNotEmpty
+                  ? device.platformName
+                  : 'Unknown',
           address: address,
           device: device,
           onItemClicked: () {

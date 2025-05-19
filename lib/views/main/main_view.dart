@@ -1,3 +1,4 @@
+import 'package:device_tracking/views/dialog/edit_text_dlg.dart';
 import 'package:device_tracking/views/items/item_device_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -85,7 +86,7 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
                   ),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
                       decoration: BoxDecoration(
                         color: ColorUtils.appColorBlack_50,
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -101,8 +102,8 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Container(
-                                    width: width * 0.2,
-                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    width: width * 0.15,
+                                    padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                     alignment: Alignment.centerLeft,
                                     child: textView(
                                       StringUtils.txtUser,
@@ -113,7 +114,7 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Container(
-                                    width: width * 0.3,
+                                    width: width * 0.25,
                                     alignment: Alignment.centerLeft,
                                     child: textView(
                                       StringUtils.txtDescription,
@@ -124,7 +125,7 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Container(
-                                    width: width * 0.2,
+                                    width: width * 0.14,
                                     alignment: Alignment.centerLeft,
                                     child: textView(
                                       StringUtils.txtStatus,
@@ -135,7 +136,7 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   Container(
-                                    width: width * 0.1,
+                                    width: width * 0.16,
                                     alignment: Alignment.centerLeft,
                                     child: textView(
                                       StringUtils.txtDelete,
@@ -264,7 +265,26 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
             },
           );
         },
-        onAddRemove: () {},
+        onDescriptionClicked: () {
+          showDialog(
+            context: context,
+            builder:
+                (BuildContext dlgContext) => EditTextDlg(
+                  title: StringUtils.txtDescription,
+                  hint: StringUtils.txtDescription,
+                  name: item.name ?? '',
+                  description: item.description ?? '',
+                  onClickSave: (String userName, String description) {
+                    item.description = description;
+                    item.name = userName;
+                    model.onChangeItemInfo(context, item);
+                  },
+                ),
+          );
+        },
+        onNameClicked: () { 
+          model.onClickItemName(context, item);
+        },
         onStatusClicked: () {
           showDialog(
             context: context,

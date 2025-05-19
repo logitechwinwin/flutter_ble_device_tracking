@@ -4,7 +4,8 @@ class StringUtils {
   static const txtPleaseEnableBluetooth = 'Please enable bluetooth';
   static const txtThisDeviceIsAlreadyConnected =
       'This device is already connected';
-  static const txtThisDeviceIsAlreadyDisconnected = 'This device is already disconnected';
+  static const txtThisDeviceIsAlreadyDisconnected =
+      'This device is already disconnected';
   static const txtThisDeviceIsAlreadyPaired = 'This device is already paired';
   static const txtErrorOccurredWhileBonding = 'Error occurred while bonding';
   static const txtPleaseDisableAndEnableAgain =
@@ -105,6 +106,7 @@ class StringUtils {
   static const txtContactAndSupport = 'Contact & Support';
   static const txtHelp = 'Help';
   static const txtHome = 'Home';
+  static const txtDevice = 'Device';
   static const txtCountry = 'Country';
   static const txtState = 'State';
   static const txtStatus = 'Status';
